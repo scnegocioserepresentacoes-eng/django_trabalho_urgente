@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Estilo básico para a lista de produtos */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .produto {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .produto img {
+            max-width: 150px;
+            max-height: 150px;
+            margin-right: 20px;
+        }
+        .produto-info {
+            flex: 1;
+        }
+        .produto-info h2 {
+            margin: 0 0 10px 0;
+        }
+        .produto-info p {
+            margin: 5px 0;
+        }
+        .produto-info .valor {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Produtos</h1>
+
+    {% if produtos %}
+        {% for produto in produtos %}
+        <div class="produto">
+            <!-- Exibe a imagem do produto -->
+            {% if produto.imagem %}
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+            {% else %}
+                <img src="{% static 'images/usuario-sem-imagem.png' %}" alt="Sem imagem">
+            {% endif %}
+
+            <div class="produto-info">
+                <h2>{{ produto.nome }}</h2>
+                <p><strong>Categoria:</strong> {{ produto.categoria }}</p>
+                <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+                <p class="valor">R$ {{ produto.valor }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum produto cadastrado.</p>
+    {% endif %}
+
+</body>
+</html>

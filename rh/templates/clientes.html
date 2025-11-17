@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Clientes{% endblock %}
+
+{% block content %}
+<h3>Lista de Clientes</h3>
+
+{% if clientes %}
+    <ul>
+        {% for cliente in clientes %}
+        <li>
+            <strong>{{ cliente.nome }}</strong><br>
+            Idade: {{ cliente.idade }}<br>
+            Email: {{ cliente.email }}<br>
+            Contato: {{ cliente.contato }}<br>
+            <hr>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum cliente cadastrado.</p>
+{% endif %}
+
+{% endblock %}
